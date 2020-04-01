@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react';
+import React, {Component} from 'react';
 import '../App.css';
 
 import fire from '../config/fire';
@@ -41,24 +41,26 @@ export default class Inscription extends Component {
             this.setState({formTitle:"Inscription", loginBtn:false, fireErrors:''});}
         else{
             this.setState({formTitle:"Connexion", loginBtn:true, fireErrors:''});
+            let connected = true;
+            localStorage.setItem('connected', connected);
         }
     }
 
     render(){
 
-
-        let errorNotification=this.state.fireErrors ?
+        let errorNotification=this.state.fireErrors?
             (<div classname="Error">{this.state.fireErrors}</div>) :null;
 
         let submitBtn = this.state.loginBtn?
             (<input className="loginBtn" type="submit" onClick={this.login} value="Entrer"/>):
             (<input className="loginBtn" type="submit" onClick={this.register} value="S'inscrire"/>)
 
-        let login_register = this.state.loginBtn ?
+        let login_register = this.state.loginBtn?
             (<button className="registerBtn" onClick={()=> this.getAction('reg')}>Inscription</button>):
             (<button className="registerBtn" onClick={()=> this.getAction('login')}>Connexion</button>)
-        
-
+            
+        let connected = true;
+        localStorage.setItem("connected", connected);
         return(        
           <div className="form_block">
             <div id="title">{this.state.formTitle}</div>
@@ -78,6 +80,7 @@ export default class Inscription extends Component {
                     name="password"/>
 
                     {submitBtn}
+                    
                 </form>
                     {login_register}
             </div>

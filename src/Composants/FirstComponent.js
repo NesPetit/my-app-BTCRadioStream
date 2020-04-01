@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../config/fire';
-import axios from 'axios';
-import ReactPlayer from "react-player"
+
 
 class FirstComponent extends Component {
 
