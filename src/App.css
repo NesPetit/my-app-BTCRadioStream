@@ -102,6 +102,7 @@ input[type="text"],input[type="password"]{
   border-radius: 3px;
 }
 
-.none{
-  display: none;
+.frame{
+  width: 35%;
+  min-height: 200px;
 }

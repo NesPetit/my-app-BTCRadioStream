@@ -6,12 +6,13 @@ WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
 COPY src ./src
+COPY server ./server
 COPY public ./public
 COPY README.md .
 
 RUN npm install
 
-EXPOSE 2369
+EXPOSE 2370
 VOLUME /app/logs
 
 CMD npm start

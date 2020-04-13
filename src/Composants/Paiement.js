@@ -31,6 +31,7 @@ class Paiement extends Component {
             test:'',
             amount:'',
             music_name:'',
+            inv:''
         }
     }
     componentDidMount(){
@@ -55,12 +56,15 @@ class Paiement extends Component {
         console.log(this.state.amount)
         if(this.state.amount !== "")
         {
+            var invoice = ""
             var amount = Number(this.state.amount)
             if(amount > 0)
             {
-                client.create_invoice({price: amount, currency: 'EUR'})
+                invoice = client.create_invoice({price: amount, currency: 'USD'})
                 .then(invoice => {
                     window.open(invoice.url)
+                    this.setState({inv: Number(invoice.id)})
+                    return invoice.id
                 })
                 .catch(err => console.log(err))
             }
@@ -82,7 +86,7 @@ class Paiement extends Component {
                     <h1> Plateforme de paiement </h1>
                     <br/>
                     <p> Gérer mon portefeuille </p>
-                    <h3 color = "rgb(0,255,0)" >1btc({1/this.state.test}€)</h3  >
+                    <h3 color = "rgb(0,255,0)" >1btc({1*this.state.test}€)</h3  >
                     <br/>
                     <p>Entrer le nom de la musique</p>
                     <input type ="text" onChange={this.handle.bind(this)} text-align="right"/>
@@ -91,6 +95,7 @@ class Paiement extends Component {
                     <button onClick={() => this.create_invoice()}>Ajouter des fonds</button>
                     <br/>
                     <br/><br/> 
+                    
                     
                     <button onClick={this.logout}>Deconnexion</button>
                     <br/>
